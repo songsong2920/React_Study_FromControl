@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import QuestionsBoard from "./components/QuestionsBoard";
+import UserContext from "./context/UserContext";
+import AppHeader from "./layout/AppHeader";
+import AppMain from "./layout/AppMain";
 import "./App.css";
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   this.handleclick = this.handleclick.bind(this);
-  // }
   state = {
     user: [
       {
@@ -31,12 +28,7 @@ class App extends Component {
       },
     ],
   };
-  link = { color: "black", textDecoration: "none" };
 
-  // class field를 사용해서 속성에 화살표 함수를 대입하고,
-  // 내부에서 직접 바인딩 처리해준다.
-
-  // 화살표 함수 방식으로 메서드를 정의하면 this가 참조 컴포넌트 인스턴스 가리키게 된다
   handleclick = (e) => {
     e.preventDefault();
     console.log(e.target);
@@ -48,12 +40,6 @@ class App extends Component {
     console.log("다른 것 호출 됨");
   }
 
-  // 이벤트 핸들러의 인자 전달
-  otherClassField = (title, e) => {
-    e.preventDefault();
-    console.log(`title ${title}`);
-  };
-  // removeId ,handleRemoveQuestion
   removeQuestion = (removeId) => {
     console.log("CallBack App Component", removeId);
 
@@ -63,43 +49,19 @@ class App extends Component {
     this.setState({ user: userFilterResult });
   };
 
-  // filter extemple
-  filterexmple() {
-    const snacks = [
-      "새우깡",
-      "썬칩",
-      "허니버터칩",
-      "꿀꽈배기",
-      "프링글스",
-      "오감자",
-    ];
-    // 3자 이상인 글자
-    const result = snacks.filter((snack) => snack.length > 3);
-    console.log(result);
-  }
-
   render() {
-    const subtitle = "replay";
-
     return (
-      <div className="app">
-        <h1>
-          <a
-            style={this.link}
-            href="https://codesandbox.io"
-            lang="en"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={this.otherClassField.bind(this, subtitle)}
-          >
-            Questions Comment
-          </a>
-        </h1>
-        <QuestionsBoard
-          user={this.state.user}
-          handleRemoveQuestion={this.removeQuestion}
-        />
-      </div>
+      <UserContext.Provider
+        value={{
+          users: this.state.user,
+          removeQuestion: this.removeQuestion,
+        }}
+      >
+        <div className="app">
+          <AppHeader title="Board" />
+          <AppMain />
+        </div>
+      </UserContext.Provider>
     );
   }
 }

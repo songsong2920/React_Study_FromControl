@@ -34,13 +34,7 @@ class QuestionsBoard extends Component {
     </div>
   );
 
-  // parentComponentMethod 화살표 함수
-  // parentComponentMethod = () => {
-  //   return console.log("부모 콜백됨");
-  // };
-
   render() {
-    const { props } = this;
     if (this.state.hasError) {
       return this.renderErrorJSX();
     }
@@ -48,12 +42,8 @@ class QuestionsBoard extends Component {
     return (
       <div className="questions-board">
         <ul>
-          {props.user.map((user) => (
-            <ReplyBoard
-              key={user.id}
-              user={user}
-              handleRemoveQuestion={props.handleRemoveQuestion}
-            />
+          {this.props.user.map((user) => (
+            <ReplyBoard key={user.id} user={user} />
           ))}
         </ul>
         <div />
