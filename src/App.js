@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import UserContext from "./context/UserContext";
 import AppHeader from "./layout/AppHeader";
 import AppMain from "./layout/AppMain";
-import "./App.css";
-
+import UserEditDialog from "./components/UserEditDialog";
 class App extends Component {
   state = {
     user: [
@@ -27,19 +26,15 @@ class App extends Component {
         avtarUrl: "https://i.postimg.cc/43MSxGm5/image.jpg",
       },
     ],
+    isVisibleDialog: false,
+    editingQuestion: null,
   };
-
-  handleclick = (e) => {
-    e.preventDefault();
-    console.log(e.target);
-    console.log(this); // this === App
-    this.otherMember();
+  editQuestion = (editId, changeQuestion) => {
+    const changeQuestions = this.state.user.map((userInfo) =>
+      userInfo.id === editId ? changeQuestion : userInfo
+    );
+    this.setState({ user: changeQuestions });
   };
-
-  otherMember() {
-    console.log("다른 것 호출 됨");
-  }
-
   removeQuestion = (removeId) => {
     console.log("CallBack App Component", removeId);
 
@@ -48,18 +43,39 @@ class App extends Component {
     );
     this.setState({ user: userFilterResult });
   };
+  showDialog = (userId) => {
+    this.setState({
+      isVisibleDialog: true,
+      editingQuestion: this.state.user.find(
+        (userInfo) => userInfo.id === userId
+      ),
+    });
+  };
+
+  hideDialog = () => {
+    this.setState({
+      isVisibleDialog: false,
+      editingQuestion: null,
+    });
+  };
 
   render() {
+    const { user, editingQuestion, isVisibleDialog } = this.state;
     return (
       <UserContext.Provider
         value={{
-          users: this.state.user,
+          users: user,
+          editingQuestion,
           removeQuestion: this.removeQuestion,
+          editQuestion: this.editQuestion,
+          showDialog: this.showDialog,
+          hideDialog: this.hideDialog,
         }}
       >
-        <div className="app">
+        <div className="app container">
           <AppHeader title="Board" />
           <AppMain />
+          <UserEditDialog visibleClass={isVisibleDialog ? "is-active" : ""} />
         </div>
       </UserContext.Provider>
     );

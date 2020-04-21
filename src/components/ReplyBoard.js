@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import UserContext from "../context/UserContext";
+import withUserContext from "../hoc/withUserContext";
 
 class ReplyBoard extends Component {
-  static contextType = UserContext;
   render() {
-    const { user } = this.props;
-    const { removeQuestion } = this.context;
+    const { user, context } = this.props;
+    const { removeQuestion } = context;
 
     return (
       <li className="commentary">
@@ -19,17 +18,22 @@ class ReplyBoard extends Component {
             <time> {user.cratedate}</time> <p> {user.content}</p>{" "}
           </figcaption>{" "}
         </figure>{" "}
-        <button
-          type="button"
-          className="remove"
-          onClick={() => removeQuestion(user.id)}
-        >
-          {" "}
-          제거{" "}
-        </button>{" "}
+        <div className="button-group" role="group">
+          <button type="button" onClick={() => context.showDialog(user.id)}>
+            수정
+          </button>
+          <button
+            type="button"
+            className="remove"
+            onClick={() => removeQuestion(user.id)}
+          >
+            {" "}
+            제거{" "}
+          </button>{" "}
+        </div>
       </li>
     );
   }
 }
 
-export default ReplyBoard;
+export default withUserContext(ReplyBoard);

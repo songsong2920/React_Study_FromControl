@@ -1,10 +1,10 @@
 import React from "react";
 
-const link = { color: "black", textDecoration: "none" };
+const link = { fontSize: "2rem", color: "#fff", textDecoration: "none" };
 
 const AppHeader = ({ title }) => {
   return (
-    <header className="App-header">
+    <header className="app-header">
       <h1>
         <a
           style={link}

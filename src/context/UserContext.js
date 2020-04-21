@@ -2,7 +2,11 @@ import React from "react";
 
 export const UserContext = {
   users: [],
-  removeQuestion: () => {},
+  editingQuestion: null,
+  removeQuestion: (removeId) => {},
+  editQuestion: (editId) => {},
+  showDialog: (userId) => {},
+  hideDialog: () => {},
 };
 
 export default React.createContext(UserContext);

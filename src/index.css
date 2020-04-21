@@ -1,0 +1,153 @@
+.app {
+  box-sizing: border-box;
+  min-width: 36.25rem;
+  max-width: 980px;
+  margin-top: 3.125rem;
+  padding: 1rem 2rem;
+}
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+li {
+  list-style: none;
+}
+
+time {
+  display: block;
+}
+
+button {
+  background: #fff;
+  border-radius: 15%;
+}
+
+button:first-child {
+  margin-right: 5px;
+}
+
+.button:hover,
+.button:focus {
+  border-color: #fff;
+}
+
+.button.is-filled {
+  border-color: rgba(70, 37, 233, 0);
+  background: rgba(70, 37, 233, 0.9);
+  color: #fff;
+}
+
+.button.is-filled:hover,
+.button.is-filled:focus {
+  background: rgba(70, 37, 233, 1);
+}
+
+.button.theme-dark {
+  border-color: currentColor;
+  color: rgba(70, 37, 233, 0.7);
+}
+
+.button.theme-dark:hover,
+.button.theme-dark:focus {
+  border-color: currentColor;
+  color: #462dd3;
+}
+
+.form-control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.label {
+  flex: 0 0 2.7rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+}
+
+.input {
+  flex: 1;
+  padding: 0.4em 0.6em;
+  border: 1px solid rgba(70, 37, 233, 0.7);
+  border-radius: 3px;
+  font-size: 1rem;
+  color: #462dd3;
+}
+
+.input:hover {
+  border-color: #462dd3;
+}
+
+.input:focus,
+.button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(70, 37, 233, 0.2);
+}
+
+.commentary {
+  position: relative;
+  right: 10px;
+  left: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-top: 1rem;
+  padding: 1em;
+}
+
+.select {
+  padding: 1rem;
+  font-size: 0.9rem;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  margin-right: 10px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.a11y-hidden {
+  overflow: hidden;
+  visibility: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+  white-space: nowrap;
+}
+
+.user-edit-dialog {
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  color: #462dd3;
+  transform: translateY(100vh);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: flex-end;
+}
+
+.user-edit-dialog .panel {
+  overflow: auto;
+  height: 30vh;
+  padding: 2rem;
+  background: #fff;
+  outline: 1px solid #b5b5b5;
+  box-shadow: 0 -20px 40px 1px rgba(170, 37, 233, 0.4);
+}
+
+.user-edit-dialog.is-active {
+  transform: none;
+}
